@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# Local configuration — never commit your own tiers/keys
+config.json
+tiers.json
+
+# Editors
+.vscode/
+.idea/

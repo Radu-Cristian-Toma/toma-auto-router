@@ -1,0 +1,48 @@
+{
+  "_comment": "Optional override for mcp_auto_router.py. Copy to config.json and point AUTO_ROUTER_CONFIG at it. Any subset of these keys may be given.",
+
+  "default_level": "easy",
+
+  "tiers": {
+    "easy": {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "alias": null,
+      "why": "Volume work: plain text, translations, files, link checks.",
+      "cost": "~$0.14/$0.28 per 1M tokens",
+      "latency": "~2s"
+    },
+    "medium": {
+      "provider": "openrouter",
+      "model": "qwen/qwen3.8-flash",
+      "alias": "or-qwen",
+      "why": "Drafting, summarising, light synthesis.",
+      "cost": "~$0.00003 per call",
+      "latency": "~4s"
+    },
+    "hard": {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro",
+      "alias": null,
+      "why": "Papers, proposals, deep analysis.",
+      "cost": "~$0.435/$0.87 per 1M tokens",
+      "latency": "~5s"
+    },
+    "offline": {
+      "provider": "ollama",
+      "model": "gemma3:12b",
+      "alias": null,
+      "why": "Sensitive data, no network, zero cost.",
+      "cost": "$0 (local)",
+      "latency": "~19 tok/s"
+    }
+  },
+
+  "signals": [
+    ["hard", 12, "\\b(article|paper|manuscript|grant|proposal|thesis|analys|reason|strateg|audit|methodolog|statistic)\\b"],
+    ["hard", 8, "\\b(prove|justify|compare|evaluate|interpret|diagnose|debug|refactor|design)\\b"],
+    ["offline", 10, "\\b(confidential|sensitive|gdpr|offline|local|private|personal data)\\b"],
+    ["medium", 6, "\\b(summar|synthes|translat|rewrite|draft|generate|explain|structure|plan)\\b"],
+    ["easy", 4, "\\b(fix|format|copy|list|count|extract|rename|convert|delete)\\b"]
+  ]
+}
